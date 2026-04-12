@@ -1,0 +1,89 @@
+<!-- 7. Main Application Form -->
+    <section id="apply" class="py-20 bg-navy-900 text-white relative">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">Start Your Journey</h2>
+                <p class="text-slate-300">Complete the form below. Takes less than 2 minutes.</p>
+            </div>
+
+            <form id="applicationForm" class="bg-white text-navy-900 rounded-2xl p-6 md:p-10 shadow-2xl">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="fullName" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="John Doe">
+                    </div>
+                    <!-- DOB -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Date of Birth <span class="text-red-500">*</span></label>
+                        <input type="date" name="dob" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address <span class="text-red-500">*</span></label>
+                        <input type="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="john@example.com">
+                    </div>
+                    <!-- Phone -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number <span class="text-red-500">*</span></label>
+                        <input type="tel" name="phone" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Address</label>
+                    <input type="text" name="address" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="City, Street, Zip Code">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Education -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Highest Education</label>
+                        <select name="education" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
+                            <option value="hs">High School Diploma</option>
+                            <option value="associate">Associate's Degree</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other Certification</option>
+                        </select>
+                    </div>
+                    <!-- Experience -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Experience (Optional)</label>
+                        <input type="text" name="experience" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="e.g. 2 years Engineering">
+                    </div>
+                </div>
+
+                <!-- File Upload -->
+                <div class="mb-8">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Upload CV / Resume (PDF, DOCX) <span class="text-red-500">*</span></label>
+                    <div class="relative border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors cursor-pointer" id="dropZone">
+                        <input type="file" name="cvFile" id="cvFile" accept=".pdf,.doc,.docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 mb-2"></i>
+                        <p class="text-sm text-slate-500 font-medium" id="fileNameDisplay">Click to upload or drag and drop</p>
+                        <p class="text-xs text-slate-400 mt-1">Max file size 5MB</p>
+                    </div>
+                </div>
+
+                <!-- Privacy & Submit -->
+                <div class="mb-6">
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 text-gold-600 border-slate-300 rounded focus:ring-gold-500">
+                        <span class="text-sm text-slate-600">
+                            I agree that my data is secure and will be used solely for recruitment purposes. I confirm the information provided is accurate.
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-navy-900 hover:bg-slate-800 text-white font-bold py-4 rounded-lg shadow-lg transition-all transform hover:scale-[1.01] flex justify-center items-center gap-2">
+                    <span>Submit Application</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>

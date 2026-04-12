@@ -1,3 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+/* Custom Utilities */
+        .hero-bg {
+            background-image: 
+    linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)),
+    url('./assets/images/uyfydu4.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form focus styles override for custom look */
+        .form-input:focus {
+            outline: none;
+            border-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #10B981; /* Green */
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 50;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        .bg-gold-500 {
+            background-color: #eab308;
+            
+        }
+
+        .bg-navy-900 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(15 23 42 / var(--tw-bg-opacity, 1));
+        }
+
+        .bg-navy-800 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
+        }
+
+        .text-gold-500 {
+            --tw-text-opacity: 1;
+            color: rgb(234 179 8 / var(--tw-text-opacity, 1));
+        }
+
+        .text-navy-900 {
+            --tw-text-opacity: 1;
+            color: rgb(15 23 42 / var(--tw-text-opacity, 1));
+        }
