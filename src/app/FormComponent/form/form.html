@@ -4,14 +4,16 @@
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold mb-4">Start Your Journey</h2>
                 <p class="text-slate-300">Complete the form below. Takes less than 2 minutes.</p>
+
+              
             </div>
 
-            <form id="applicationForm" class="bg-white text-navy-900 rounded-2xl p-6 md:p-10 shadow-2xl">
+            <form [formGroup]="cvForm" (ngSubmit)="onSubmit()" id="applicationForm" class="bg-white text-navy-900 rounded-2xl p-6 md:p-10 shadow-2xl">
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
                     <!-- Name -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name <span class="text-red-500">*</span></label>
-                        <input type="text" name="fullName" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="John Doe">
+                        <input type="text" formControlName = "fullName" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="John Doe">
                     </div>
                     <!-- DOB -->
                     <div>
@@ -24,7 +26,7 @@
                     <!-- Email -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address <span class="text-red-500">*</span></label>
-                        <input type="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="john@example.com">
+                        <input type="email" formControlName="email" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="john@example.com">
                     </div>
                     <!-- Phone -->
                     <div>
@@ -63,10 +65,21 @@
                 <div class="mb-8">
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Upload CV / Resume (PDF, DOCX) <span class="text-red-500">*</span></label>
                     <div class="relative border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:bg-slate-50 transition-colors cursor-pointer" id="dropZone">
-                        <input type="file" name="cvFile" id="cvFile" accept=".pdf,.doc,.docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
+                        <input type="file" #fileInput (change)="onFileSelected($event)" name="cvFile" id="cvFile" accept=".pdf,.doc,.docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
                         <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 mb-2"></i>
-                        <p class="text-sm text-slate-500 font-medium" id="fileNameDisplay">Click to upload or drag and drop</p>
+                        <p class="text-sm text-slate-500 font-medium">
+                        <span *ngIf="!fileName">
+                            Click to upload or drag and drop
+                        </span>
+
+                        <span *ngIf="fileName" class="text-green-600 font-semibold">
+                            📄 {{ fileName }}
+                        </span>
+                        </p>
                         <p class="text-xs text-slate-400 mt-1">Max file size 5MB</p>
+                        <!--div (click)="fileInput.click()">
+                           {{ fileName }}
+                        </div-->
                     </div>
                 </div>
 
@@ -80,10 +93,40 @@
                     </label>
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full bg-navy-900 hover:bg-slate-800 text-white font-bold py-4 rounded-lg shadow-lg transition-all transform hover:scale-[1.01] flex justify-center items-center gap-2">
-                    <span>Submit Application</span>
+                <button type="submit"
+                        id="submitBtn"
+                        [disabled]="isSubmitting"
+                        class="w-full bg-navy-900 hover:bg-slate-800 disabled:bg-gray-400 text-white font-bold py-4 rounded-lg shadow-lg transition-all flex justify-center items-center gap-2">
+                    <span *ngIf="!isSubmitting">
+                    Submit Application
                     <i class="fa-solid fa-paper-plane"></i>
+                    </span>
+
+                    <span *ngIf="isSubmitting">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Sending your application...
+                    </span>
                 </button>
             </form>
+            <div *ngIf="showToastFlag" class="toast">
+               ✅ Submitted successfully!
+            </div>
         </div>
     </section>
+    <div class="mt-8 bg-slate-100 p-5 rounded-lg text-navy-900">
+    <h3 class="font-bold text-xl mb-4">Preview Data</h3>
+
+    <p><strong>Name:</strong> {{ cvForm.value.fullName }}</p>
+    <p><strong>Email:</strong> {{ cvForm.value.email }}</p>
+    <p><strong>Phone:</strong> {{ cvForm.value.phoneNumber }}</p>
+    <p><strong>Date of Birth:</strong> {{ cvForm.value.dateOfBirth }}</p>
+    <p><strong>Address:</strong> {{ cvForm.value.address }}</p>
+    <p><strong>Education:</strong> {{ cvForm.value.education }}</p>
+    <p><strong>Experience:</strong> {{ cvForm.value.experience }}</p>
+
+    @if(fileName) {
+        <p>
+            <strong>CV File:</strong> 📄 {{ fileName }}
+        </p>
+    }
+</div>

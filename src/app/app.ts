@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Header } from "./Header/header/header";
 import { TrustSignals } from "./TrustSignalsComponent/trust-signals/trust-signals";
 import { ValueProposition } from "./ValuePropositionComponent/value-proposition/value-proposition";
@@ -8,10 +8,11 @@ import { EligibilityRequirements } from './EligibilityRequirementsComponent/elig
 import { Form } from './FormComponent/form/form';
 import { Faq } from './FAQComponent/faq/faq';
 import { Footer } from './FooterComponent/footer/footer';
+import { Applicants} from './ApplicantsComponent/applicants/applicants';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, TrustSignals, ValueProposition,NavyLife,EligibilityRequirements,Form,Faq,Footer],
+  imports: [RouterOutlet,RouterLink, Header, TrustSignals, ValueProposition,NavyLife,EligibilityRequirements,Form,Faq,Footer,Applicants],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

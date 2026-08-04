@@ -1,0 +1,39 @@
+<section id="applicants" class="py-20 bg-slate-50 border-t border-slate-200">
+
+    <table class="w-full">
+
+<thead>
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+@for(applicant of applicants; track applicant.id) {
+
+<tr>
+
+<td>
+{{ applicant.fullName }}
+</td>
+
+<td>
+{{ applicant.email }}
+</td>
+
+<td>
+{{ applicant.phoneNumber }}
+</td>
+
+</tr>
+
+}
+
+</tbody>
+
+</table>
+</section>
