@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AuthServices } from '../../Services/LoginServices/auth-services';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServices, LoginRequest } from '../../Services/LoginServices/auth-services';
 
 @Component({
   selector: 'app-login',
@@ -10,38 +10,38 @@ import { Router } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
-  
-  loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private authServices: AuthServices, private router: Router ) {
-    this.loginForm = this.fb.group({
-      username: [''],
-      passwordHash: ['']
-      
-    })
-  }
+  private readonly fb = inject(FormBuilder);
+  private readonly authServices = inject(AuthServices);
+  private readonly router = inject(Router);
+
+  readonly loginForm = this.fb.nonNullable.group({
+    username: ['', Validators.required],
+    passwordHash: ['', Validators.required],
+  });
 
   login() {
-    console.log(this.loginForm.value)
-    this.authServices.login(this.loginForm.value).subscribe({
-      next: (res:any) => {
-        localStorage.setItem(
-          'user',
-          JSON.stringify(res)
-        );
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
 
-        if(res.role == 'Admin'){
-          this.router.navigate(['/admin'])
-        }
+    const request: LoginRequest = this.loginForm.getRawValue();
 
-        if(res.role == 'User'){
-          this.router.navigate(['/home'])
+    this.authServices.login(request).subscribe({
+      next: (res) => {
+        localStorage.setItem('user', JSON.stringify(res));
+
+        // The API nests the role inside `user` ({ message, token, user: { role } }).
+        // Reading `res.role` was always undefined, so nobody was ever redirected.
+        if (res.user.role === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/home']);
         }
       },
       error: () => {
-        alert("Invalid Login");
-      }
-    })
+        alert('Invalid Login');
+      },
+    });
   }
-
-  
 }

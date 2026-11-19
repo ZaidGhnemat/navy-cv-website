@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideRouter } from '@angular/router';
 import { Header } from './header';
 
 describe('Header', () => {
@@ -9,6 +10,8 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
+      // Header uses routerLink, which needs the router to be provided.
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);

@@ -1,8 +1,5 @@
-import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { email } from '@angular/forms/signals';
-import { ReactiveFormsModule } from '@angular/forms';
-/*import { NgIf } from "../../../../node_modules/@angular/common/types/_common_module-chunk";*/
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { NavyCvService } from '../../Services/navy-cv-service';
 
@@ -31,10 +28,12 @@ export class Form {
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      address: ['', Validators.required],
+      address: [''], // optional: the API allows null and the label says optional
       education: ['', Validators.required],
       experience: [''],
-      cv: [null, Validators.required]
+      cv: [null, Validators.required],
+      // Plain `required` on a checkbox is ignored by reactive forms; requiredTrue enforces it.
+      consent: [false, Validators.requiredTrue]
     });
 
   }
@@ -56,9 +55,9 @@ export class Form {
   }
 
   onSubmit() {
-    console.log(this.cvForm.value);
     if(this.cvForm.invalid) {
-      console.log(this.cvForm.value);
+      // Shows validation state on every field the user skipped.
+      this.cvForm.markAllAsTouched();
       return ;
     }
 
