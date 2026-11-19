@@ -13,12 +13,12 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name <span class="text-red-500">*</span></label>
-                        <input type="text" formControlName = "fullName" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="John Doe">
+                        <input type="text" formControlName="fullName" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="John Doe">
                     </div>
                     <!-- DOB -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Date of Birth <span class="text-red-500">*</span></label>
-                        <input type="date" name="dob" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
+                        <input type="date" formControlName="dateOfBirth" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
                     </div>
                 </div>
 
@@ -26,26 +26,27 @@
                     <!-- Email -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address <span class="text-red-500">*</span></label>
-                        <input type="email" formControlName="email" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="john@example.com">
+                        <input type="email" formControlName="email" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="john@example.com">
                     </div>
                     <!-- Phone -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number <span class="text-red-500">*</span></label>
-                        <input type="tel" name="phone" required class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="+1 (555) 000-0000">
+                        <input type="tel" formControlName="phoneNumber" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="+1 (555) 000-0000">
                     </div>
                 </div>
 
                 <!-- Address -->
                 <div class="mb-6">
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Address</label>
-                    <input type="text" name="address" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="City, Street, Zip Code">
+                    <input type="text" formControlName="address" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="City, Street, Zip Code">
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6 mb-6">
                     <!-- Education -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Highest Education</label>
-                        <select name="education" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
+                        <select formControlName="education" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors">
+                            <option value="" disabled>Select your highest education</option>
                             <option value="hs">High School Diploma</option>
                             <option value="associate">Associate's Degree</option>
                             <option value="bachelor">Bachelor's Degree</option>
@@ -57,7 +58,7 @@
                     <!-- Experience -->
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Experience (Optional)</label>
-                        <input type="text" name="experience" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="e.g. 2 years Engineering">
+                        <input type="text" formControlName="experience" class="form-input w-full px-4 py-3 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white transition-colors" placeholder="e.g. 2 years Engineering">
                     </div>
                 </div>
 
@@ -86,7 +87,7 @@
                 <!-- Privacy & Submit -->
                 <div class="mb-6">
                     <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" required class="mt-1 w-5 h-5 text-gold-600 border-slate-300 rounded focus:ring-gold-500">
+                        <input type="checkbox" formControlName="consent" class="mt-1 w-5 h-5 text-brass-700 border-slate-300 rounded focus:ring-brass-400">
                         <span class="text-sm text-slate-600">
                             I agree that my data is secure and will be used solely for recruitment purposes. I confirm the information provided is accurate.
                         </span>
@@ -113,20 +114,3 @@
             </div>
         </div>
     </section>
-    <div class="mt-8 bg-slate-100 p-5 rounded-lg text-navy-900">
-    <h3 class="font-bold text-xl mb-4">Preview Data</h3>
-
-    <p><strong>Name:</strong> {{ cvForm.value.fullName }}</p>
-    <p><strong>Email:</strong> {{ cvForm.value.email }}</p>
-    <p><strong>Phone:</strong> {{ cvForm.value.phoneNumber }}</p>
-    <p><strong>Date of Birth:</strong> {{ cvForm.value.dateOfBirth }}</p>
-    <p><strong>Address:</strong> {{ cvForm.value.address }}</p>
-    <p><strong>Education:</strong> {{ cvForm.value.education }}</p>
-    <p><strong>Experience:</strong> {{ cvForm.value.experience }}</p>
-
-    @if(fileName) {
-        <p>
-            <strong>CV File:</strong> 📄 {{ fileName }}
-        </p>
-    }
-</div>

@@ -30,8 +30,14 @@ export const routes: Routes = [
                 component: HomeComponent
             },
             {
-                path: 'about',
+                // Recruiter list of applicants. The login page sends admins here.
+                // Not protected yet: an auth guard comes with the admin dashboard step.
+                path: 'admin',
                 component: Applicants
+            },
+            {
+                path: 'about',
+                redirectTo: 'admin'
             },
             {
                 path: 'navyLife',
