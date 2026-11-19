@@ -1,81 +1,96 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
-/* Custom Utilities */
-        .hero-bg {
-            background-image: 
-    linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)),
+
+/*
+ * Design tokens.
+ * Everything declared in @theme becomes a Tailwind utility automatically,
+ * including opacity modifiers and state variants:
+ *   --color-navy-900  ->  bg-navy-900, text-navy-900, border-navy-900/20, hover:bg-navy-900 ...
+ *   --font-display    ->  font-display
+ * Do not hand-write color classes below; add a token here instead.
+ */
+@theme {
+  /* Navy: brand and surfaces (hue ~220deg) */
+  --color-navy-950: #07142b; /* hero, nav, admin sidebar */
+  --color-navy-900: #0b1f3f; /* headings, dark panels */
+  --color-navy-800: #13305c; /* raised surfaces on dark */
+  --color-navy-700: #1d447d; /* links, focus ring */
+  --color-navy-600: #2c5a9e;
+  --color-navy-200: #c5d2e4; /* text on dark (8.2:1 on navy-900) */
+  --color-navy-100: #dce6f3;
+  --color-navy-50: #eef3f9; /* selected rows, drop zone */
+
+  /* Brass: the accent. 400 is for fills on navy, 700 is for text on light backgrounds. */
+  --color-brass-100: #f6ebcf;
+  --color-brass-300: #e3be63; /* hover for brass-400 */
+  --color-brass-400: #d4a63a; /* primary button (7.3:1 with navy-900 text) */
+  --color-brass-700: #8a6612; /* gold text on white (5.3:1) */
+
+  /* Mist: blue-tinted neutrals */
+  --color-mist-50: #f4f6fa; /* page background */
+  --color-mist-200: #e2e8f0; /* borders */
+  --color-mist-400: #8c9bb3; /* muted text on dark */
+  --color-mist-600: #5b6b84; /* secondary text on light (5.4:1) */
+  --color-mist-900: #1a2333; /* body text */
+
+  /* Status (separate from the accent on purpose) */
+  --color-success: #1f7a4d;
+  --color-success-bg: #e3f2ea;
+  --color-warning: #9a5b00;
+  --color-warning-bg: #fbefd9;
+  --color-danger: #b42318;
+  --color-danger-bg: #fde8e6;
+
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Barlow Semi Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-mist-50 font-sans text-mist-900 antialiased;
+  }
+
+  /* One visible focus style for every interactive element (WCAG 2.4.7). */
+  :focus-visible {
+    outline: 2px solid var(--color-navy-700);
+    outline-offset: 2px;
+  }
+}
+
+/* ---- Page-level helpers still used by the current templates ---- */
+
+.hero-bg {
+  background-image:
+    linear-gradient(rgb(7 20 43 / 0.75), rgb(7 20 43 / 0.75)),
     url('./assets/images/uyfydu4.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+  background-size: cover;
+  background-position: center;
+}
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
 
-        /* Form focus styles override for custom look */
-        .form-input:focus {
-            outline: none;
-            border-color: #eab308;
-            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
-        }
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        /* Toast Notification */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #10B981; /* Green */
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 16px;
-            position: fixed;
-            z-index: 50;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
-        }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
-        }
-
-        .bg-gold-500 {
-            background-color: #eab308;
-            
-        }
-
-        .bg-navy-900 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(15 23 42 / var(--tw-bg-opacity, 1));
-        }
-
-        .bg-navy-800 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
-        }
-
-        .text-gold-500 {
-            --tw-text-opacity: 1;
-            color: rgb(234 179 8 / var(--tw-text-opacity, 1));
-        }
-
-        .text-navy-900 {
-            --tw-text-opacity: 1;
-            color: rgb(15 23 42 / var(--tw-text-opacity, 1));
-        }
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-navy-700);
+  box-shadow: 0 0 0 3px rgb(29 68 125 / 0.18);
+}
